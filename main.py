@@ -1,8 +1,14 @@
 import imageio
 import matplotlib.pyplot as plt
+import sys
 
 from Line import Line
 from Point import Point
+
+line = Line([])
+print("Punkt eingeben (Form: x,y dezimalstellen mit Punkt):")
+for stdline in sys.stdin:
+    stdline
 
 #line = Line([Point(-3, 9), Point(-2, 4), Point(-1, 1), Point(0, 0), Point(1, 1), Point(2, 4), Point(3, 9)])
 #line = Line([Point(0, 3), Point(3, 8), Point(5, 2), Point(8, 5)])
