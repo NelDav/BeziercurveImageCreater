@@ -5,6 +5,7 @@ import os
 
 from Line import Line
 from Point import Point
+from Progressbar import  Progressbar
 
 line = Line([])
 print("Insert points (Form: x,y) continue with \'q\':")
@@ -56,15 +57,24 @@ def createSubLine(line, t):
 
 
 filenames = []
+progessbar = Progressbar()
+print("calculating...")
 for t in range(0, 101, 1):
     plt.plot(line.xArray(), line.yArray(), '-o')
     createSubLine(line, t)
     plt.plot(bezierLine.xArray(), bezierLine.yArray())
-    plt.savefig(os.path.normpath(path + "pic" + str(t) + ".png"), dpi=dpi)
-    filenames.append(os.path.normpath(path + "pic" + str(t) + ".png"))
+    os.makedirs(os.path.normpath(path) + "\\img\\", exist_ok=True)
+    plt.savefig(os.path.normpath(path) + "\\img\\" + "pic" + str(t) + ".png", dpi=dpi)
+    filenames.append(os.path.normpath(path) + "\\img\\" + "pic" + str(t) + ".png")
     plt.close()
+
+    progessbar.print(t)
+
+print("\ncreate gif...")
 
 images = []
 for filename in filenames:
     images.append(imageio.imread(filename))
-imageio.mimsave(os.path.normpath(path + "img.gif"), images)
+imageio.mimsave(os.path.normpath(path) + "\\img.gif", images)
+
+print("done")
