@@ -1,18 +1,26 @@
 import imageio
 import matplotlib.pyplot as plt
 import sys
+import os
 
 from Line import Line
 from Point import Point
 
 line = Line([])
-print("Punkt eingeben (Form: x,y dezimalstellen mit Punkt):")
+print("Insert points (Form: x,y) continue with \'q\':")
 for stdline in sys.stdin:
     if stdline == "q\n" or stdline == "Q\n" or stdline == "quit\n" or stdline == "Quit\n":
         break
     else:
         numbers = stdline.split(",")
         line.addPoint(Point(int(numbers[0]), int(numbers[1])))
+
+print("Define path:")
+path = sys.stdin.readline().replace("\n", "")
+
+print("Which resolution do you want (only one number (dpi))")
+dpi = sys.stdin.readline().replace("\n", "")
+dpi = int(dpi)
 
 # line = Line([Point(-3, 9), Point(-2, 4), Point(-1, 1), Point(0, 0), Point(1, 1), Point(2, 4), Point(3, 9)])
 # line = Line([Point(0, 3), Point(3, 8), Point(5, 2), Point(8, 5)])
@@ -52,11 +60,11 @@ for t in range(0, 101, 1):
     plt.plot(line.xArray(), line.yArray(), '-o')
     createSubLine(line, t)
     plt.plot(bezierLine.xArray(), bezierLine.yArray())
-    plt.savefig("D:\\huhu\\pic" + str(t) + ".png")
-    filenames.append("D:\\huhu\\pic" + str(t) + ".png")
+    plt.savefig(os.path.normpath(path + "pic" + str(t) + ".png"), dpi=dpi)
+    filenames.append(os.path.normpath(path + "pic" + str(t) + ".png"))
     plt.close()
 
 images = []
 for filename in filenames:
     images.append(imageio.imread(filename))
-imageio.mimsave('D:\\huhu\\img.gif', images)
+imageio.mimsave(os.path.normpath(path + "img.gif"), images)
