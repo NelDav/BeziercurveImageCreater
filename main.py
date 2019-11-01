@@ -8,13 +8,18 @@ from Point import Point
 line = Line([])
 print("Punkt eingeben (Form: x,y dezimalstellen mit Punkt):")
 for stdline in sys.stdin:
-    stdline
+    if stdline == "q\n" or stdline == "Q\n" or stdline == "quit\n" or stdline == "Quit\n":
+        break
+    else:
+        numbers = stdline.split(",")
+        line.addPoint(Point(int(numbers[0]), int(numbers[1])))
 
-#line = Line([Point(-3, 9), Point(-2, 4), Point(-1, 1), Point(0, 0), Point(1, 1), Point(2, 4), Point(3, 9)])
-#line = Line([Point(0, 3), Point(3, 8), Point(5, 2), Point(8, 5)])
-line = Line([Point(0, 0), Point(1, 1), Point(2, 0), Point(3, -1), Point(4, 0)])
+# line = Line([Point(-3, 9), Point(-2, 4), Point(-1, 1), Point(0, 0), Point(1, 1), Point(2, 4), Point(3, 9)])
+# line = Line([Point(0, 3), Point(3, 8), Point(5, 2), Point(8, 5)])
+# line = Line([Point(0, 0), Point(1, 1), Point(2, 0), Point(3, -1), Point(4, 0)])
 
 bezierLine = Line([])
+
 
 def createSubLine(line, t):
     newLine = Line([])
@@ -41,6 +46,7 @@ def createSubLine(line, t):
     else:
         bezierLine.addPoint(newLine.points[0])
 
+
 filenames = []
 for t in range(0, 101, 1):
     plt.plot(line.xArray(), line.yArray(), '-o')
@@ -49,8 +55,6 @@ for t in range(0, 101, 1):
     plt.savefig("D:\\huhu\\pic" + str(t) + ".png")
     filenames.append("D:\\huhu\\pic" + str(t) + ".png")
     plt.close()
-
-
 
 images = []
 for filename in filenames:
