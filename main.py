@@ -75,6 +75,10 @@ print("\ncreate gif...")
 images = []
 for filename in filenames:
     images.append(imageio.imread(filename))
+
+for i in range (0, 25, 1):
+    images.append(images[len(images)-1])
+
 imageio.mimsave(os.path.normpath(path) + "\\img.gif", images)
 
 print("done")
