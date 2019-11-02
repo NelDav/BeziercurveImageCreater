@@ -14,7 +14,7 @@ for stdline in sys.stdin:
         break
     else:
         numbers = stdline.split(",")
-        line.addPoint(Point(int(numbers[0]), int(numbers[1])))
+        line.addPoint(Point(float(numbers[0]), float(numbers[1])))
 
 print("Define path:")
 path = sys.stdin.readline().replace("\n", "")
